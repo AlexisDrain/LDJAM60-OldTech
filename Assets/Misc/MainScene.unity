@@ -1771,7 +1771,7 @@ GameObject:
   - component: {fileID: 93871013}
   m_Layer: 0
   m_Name: Trail
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2426,7 +2426,7 @@ GameObject:
   - component: {fileID: 330585547}
   m_Layer: 0
   m_Name: MainCameraLight
-  m_TagString: MainCamera
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7067,7 +7067,7 @@ GameObject:
   - component: {fileID: 614961032}
   m_Layer: 0
   m_Name: CrosshairWorldOrigin
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7159,7 +7159,7 @@ GameObject:
   - component: {fileID: 711434150}
   m_Layer: 0
   m_Name: CrosshairWorld
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7889,7 +7889,7 @@ GameObject:
   - component: {fileID: 806670580}
   m_Layer: 0
   m_Name: Graphics
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9503,7 +9503,7 @@ GameObject:
   - component: {fileID: 961420827}
   m_Layer: 0
   m_Name: GraphicsHand
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9517,7 +9517,7 @@ Transform:
   m_GameObject: {fileID: 961420823}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.030000001, z: 0.15250002}
+  m_LocalPosition: {x: 0.0723, y: 0.030000001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9596,7 +9596,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   shootSFX: {fileID: 8300000, guid: 3a7f08d47a3bb1b4b8cb550b2d714156, type: 3}
-  light: {fileID: 0}
+  bulletPrefab: {fileID: 3168510522378465478, guid: b2bc7c5a8e240844db3250f4c996137d, type: 3}
 --- !u!114 &961420827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9882,7 +9882,7 @@ GameObject:
   - component: {fileID: 971401968}
   m_Layer: 0
   m_Name: LineToCrosshair
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10026,7 +10026,7 @@ GameObject:
   - component: {fileID: 1000630321}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11766,7 +11766,7 @@ GameObject:
   - component: {fileID: 1128192145}
   m_Layer: 0
   m_Name: MainCameraDark
-  m_TagString: MainCamera
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15275,7 +15275,7 @@ GameObject:
   - component: {fileID: 1958985844}
   m_Layer: 0
   m_Name: PlayerDolly
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

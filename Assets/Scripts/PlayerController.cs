@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     public Transform crosshairUIPhantom;
 
     private Vector2 pointerDelta;
+    private Vector2 keyboardLook;
     void Start()
     {
 
@@ -61,11 +62,13 @@ public class PlayerController : MonoBehaviour
         }
 
         pointerDelta = GameManager.playerActionsControls.Player.Look.ReadValue<Vector2>();
+        keyboardLook = GameManager.playerActionsControls.Player.LookKeyboard.ReadValue<Vector2>();
 
         crosshairWorld.position += new Vector3(pointerDelta.x, pointerDelta.y, 0f) / 50f;
         crosshairUI.position += new Vector3(pointerDelta.x, pointerDelta.y, 0f);
 
         playerRigidbody.MoveRotation(playerRigidbody.rotation * Quaternion.Euler(-pointerDelta.y, 0, 0));
+        playerRigidbody.MoveRotation(playerRigidbody.rotation * Quaternion.Euler(-keyboardLook.y*1.5f, 0, 0));
         playerRigidbody.angularVelocity *= 0.95f;
 
         playerRigidbody.AddForce(GameManager.playerTrans.forward * pointerDelta.x / 5f);
