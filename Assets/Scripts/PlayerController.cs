@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public float horizontalMoveForce = 10f;
     public float torqueForce = 1f;
     public Rigidbody playerRigidbody;
+    public Transform playerGraphics;
     public Transform playerHand;
     public RectTransform crosshairUI;
     public LineRenderer myLine;
@@ -18,7 +19,10 @@ public class PlayerController : MonoBehaviour
     {
 
     }
-    private void Update() {
+    private void LateUpdate() {
+        // playerGraphics.position = Vector3.Lerp(playerGraphics.position, playerRigidbody.position, 30f * Time.deltaTime);
+        playerGraphics.position = playerRigidbody.transform.position;
+        playerGraphics.rotation = Quaternion.Lerp(playerGraphics.rotation, playerRigidbody.rotation * Quaternion.Euler(0f, -90f, 0f), 10f * Time.deltaTime);
         myLine.SetPosition(0, new Vector3(playerHand.position.x, playerHand.position.y, 0f));
         myLine.SetPosition(1, new Vector3(crosshair.position.x, crosshair.position.y, 0f));
     }
