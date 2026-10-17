@@ -1,16 +1,22 @@
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
-{
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+public class GameManager : MonoBehaviour {
+    public static bool gameIsPaused = false;
+    public static Transform playerTrans;
+    public static InputSystem_Actions playerActionsControls;
+    void Awake()
     {
-        
+
+        // Time.timeScale = 0f;
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        playerActionsControls = new InputSystem_Actions();
+        playerActionsControls.Enable();
+        playerTrans = GameObject.Find("Player").transform;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    void FixedUpdate() {
+
     }
 }
