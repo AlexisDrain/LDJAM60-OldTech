@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour {
     public static Transform playerTrans;
     public static Camera mainCamLight;
 
+    public Transform playerSpawn;
+
     void Awake()
     {
 
@@ -26,5 +28,8 @@ public class GameManager : MonoBehaviour {
         soundManager.Init();
         playerTrans = GameObject.Find("Player").transform;
         mainCamLight = GameObject.Find("MainCameraLight").GetComponent<Camera>();
+
+        GameManager.playerTrans.GetComponent<Rigidbody>().MovePosition(playerSpawn.position);
+        // GameManager.playerTrans.position = playerSpawn.position;
     }
 }

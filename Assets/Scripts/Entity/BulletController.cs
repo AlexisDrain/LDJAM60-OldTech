@@ -5,6 +5,7 @@ public class BulletController : MonoBehaviour
     /* Alexis Clay Drain */
     public Vector3 direction;
     public float speed = 10f;
+    public int damage = 10;
 
     // public TrailRenderer myTrail;
     private Rigidbody myRigidbody;
@@ -17,6 +18,10 @@ public class BulletController : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Player")) {
             return;
+        }
+
+        if (other.GetComponent<EntityHealth>()) {
+            other.GetComponent<EntityHealth>().DoDamage(damage);
         }
         gameObject.SetActive(false);
     }

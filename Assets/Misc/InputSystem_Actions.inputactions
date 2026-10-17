@@ -47,7 +47,7 @@
                     "priority": 0
                 },
                 {
-                    "name": "Interact",
+                    "name": "ZeroGrav",
                     "type": "Button",
                     "id": "852140f2-7766-474d-8707-702459ba45f3",
                     "expectedControlType": "",
@@ -478,7 +478,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Interact",
+                    "action": "ZeroGrav",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -489,7 +489,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Interact",
+                    "action": "ZeroGrav",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

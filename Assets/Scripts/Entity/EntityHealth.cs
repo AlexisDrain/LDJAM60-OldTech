@@ -1,0 +1,32 @@
+using UnityEngine;
+
+public class EntityHealth : MonoBehaviour
+{
+    /* Alexis Clay Drain */
+    private int _health;
+    public int maxHealth;
+    public int health {
+        get {
+            return _health;
+        }
+        set {
+            _health = Mathf.Clamp(value, 0, maxHealth);
+        }
+    }
+    void Start() {
+        
+    }
+    private void OnEnable() {
+        health = maxHealth;
+    }
+    public void DoDamage(int damage) {
+        if (damage < 0) {
+            damage = -damage;
+            print("Damage shouldn't be negative");
+        }
+        health -= damage;
+        if (health <= 0) {
+            gameObject.SetActive(false);
+        }
+    }
+}
