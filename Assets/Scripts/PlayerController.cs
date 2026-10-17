@@ -11,9 +11,11 @@ public class PlayerController : MonoBehaviour
     public Rigidbody playerRigidbody;
     public Transform playerGraphics;
     public Transform playerHand;
-    public RectTransform crosshairUI;
     public LineRenderer myLine;
-    public Transform crosshair;
+    public Transform crosshairWorld;
+    public Transform crosshairWorldOrigin;
+    public RectTransform crosshairUI;
+    public Transform crosshairUIPhantom;
 
     private Vector2 pointerDelta;
     void Start()
@@ -22,10 +24,12 @@ public class PlayerController : MonoBehaviour
     }
     private void LateUpdate() {
         // playerGraphics.position = Vector3.Lerp(playerGraphics.position, playerRigidbody.position, 30f * Time.deltaTime);
+        crosshairWorld.position = Vector3.Lerp(crosshairWorld.position, crosshairWorldOrigin.position, 5f * Time.deltaTime);
+        crosshairUI.position = Vector3.Lerp(crosshairUI.position, crosshairUIPhantom.position, 5f * Time.deltaTime);
         playerGraphics.position = playerRigidbody.transform.position;
         playerGraphics.rotation = Quaternion.Lerp(playerGraphics.rotation, playerRigidbody.rotation * Quaternion.Euler(0f, -90f, 0f), 10f * Time.deltaTime);
         myLine.SetPosition(0, new Vector3(playerHand.position.x, playerHand.position.y, 0f));
-        myLine.SetPosition(1, new Vector3(crosshair.position.x, crosshair.position.y, 0f));
+        myLine.SetPosition(1, new Vector3(crosshairWorld.position.x, crosshairWorld.position.y, 0f));
     }
     private void FixedUpdate() {
         //// mouse
@@ -58,8 +62,13 @@ public class PlayerController : MonoBehaviour
 
         pointerDelta = GameManager.playerActionsControls.Player.Look.ReadValue<Vector2>();
 
+        crosshairWorld.position += new Vector3(pointerDelta.x, pointerDelta.y, 0f) / 50f;
+        crosshairUI.position += new Vector3(pointerDelta.x, pointerDelta.y, 0f);
+
         playerRigidbody.MoveRotation(playerRigidbody.rotation * Quaternion.Euler(-pointerDelta.y, 0, 0));
         playerRigidbody.angularVelocity *= 0.95f;
+
+        playerRigidbody.AddForce(GameManager.playerTrans.forward * pointerDelta.x / 5f);
         // playerRigidbody.AddTorque(new Vector3(0, 0, -pointerDelta.y));
 
         //// keyboard

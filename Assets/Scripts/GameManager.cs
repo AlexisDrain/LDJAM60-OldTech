@@ -1,9 +1,16 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
+
     public static bool gameIsPaused = false;
-    public static Transform playerTrans;
     public static InputSystem_Actions playerActionsControls;
+
+    public static GameManager myGameManager;
+    public static SoundManager soundManager;
+    public static Transform playerTrans;
+    public static Camera mainCamLight;
+
     void Awake()
     {
 
@@ -13,10 +20,11 @@ public class GameManager : MonoBehaviour {
         Cursor.lockState = CursorLockMode.Locked;
         playerActionsControls = new InputSystem_Actions();
         playerActionsControls.Enable();
+
+        myGameManager = GetComponent<GameManager>();
+        soundManager = GetComponent<SoundManager>();
+        soundManager.Init();
         playerTrans = GameObject.Find("Player").transform;
-    }
-
-    void FixedUpdate() {
-
+        mainCamLight = GameObject.Find("MainCameraLight").GetComponent<Camera>();
     }
 }
