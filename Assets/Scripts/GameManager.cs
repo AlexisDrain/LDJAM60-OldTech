@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour {
     public static GameManager myGameManager;
     public static SoundManager soundManager;
     public static Transform playerTrans;
+    public static PlayerInv playerInv;
     public static Camera mainCamLight;
 
     public Transform playerSpawn;
@@ -26,10 +27,11 @@ public class GameManager : MonoBehaviour {
         myGameManager = GetComponent<GameManager>();
         soundManager = GetComponent<SoundManager>();
         soundManager.Init();
+        playerInv = GameObject.Find("PlayerDolly").GetComponent<PlayerInv>();
         playerTrans = GameObject.Find("Player").transform;
         mainCamLight = GameObject.Find("MainCameraLight").GetComponent<Camera>();
 
-        GameManager.playerTrans.GetComponent<Rigidbody>().MovePosition(playerSpawn.position);
+        GameManager.playerTrans.GetComponent<Rigidbody>().Move(playerSpawn.position, playerSpawn.rotation);
         // GameManager.playerTrans.position = playerSpawn.position;
     }
 }

@@ -16,7 +16,7 @@ public class BulletController : MonoBehaviour
         // myTrail.AddPosition(transform.position);
     }
     private void OnTriggerEnter(Collider other) {
-        if (other.CompareTag("Player")) {
+        if (other.CompareTag("Player") || other.CompareTag("Bullet")) {
             return;
         }
 

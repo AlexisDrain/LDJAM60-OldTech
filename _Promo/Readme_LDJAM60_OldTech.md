@@ -41,6 +41,15 @@ No generative AI was used in the creation of this game.
 - UI buttons click SFX:
 Halfquake 1 by Muddasheep https://store.steampowered.com/app/644320/Halfquake_Trilogy/ - Attribution-NonCommercial 3.0 Unported  
 
+- UI buttons hover. Player injury sound. Explosions. Enemy attack charge. Crunchy sound effects:  
+BFXR https://www.bfxr.net/
+
+- Weapon pickup:
+loy's gun bullet case in.wav by martian -- https://freesound.org/s/182261/ -- License: Creative Commons 0
+
+- Empty weapon:
+https://freesound.org/people/Dredile/sounds/111676/ -- License: Creative Commons 0
+
 - Guns:
 Sonniss 2017 - Game Audio Bundle\Gamemaster Audio -  Gun Sound Pack\gun_revolver_pistol_shot_04.wav
 Sonnis 2020 - Game Audio Bundle\Super Thump - Weapons of World War II - Designed\STDSGN_WoWW2_Wep_MG_M1919_Machinegun_Auto-Burst_Shot_X6.wav

@@ -15,6 +15,9 @@ public class PlayerZeroGrav : MonoBehaviour
     void Start() {
 
     }
+    private void OnDisable() {
+        attachedObject = null;
+    }
     RaycastHit hit;
     public void Update() {
 
@@ -27,7 +30,7 @@ public class PlayerZeroGrav : MonoBehaviour
             crosshairLine.startColor = Color.white;
         }
 
-        if(GameManager.playerActionsControls.Player.ZeroGrav.WasPressedThisFrame()) {
+        if(GameManager.playerActionsControls.Player.Shoot.WasPressedThisFrame()) {
             if (attachedObject != null) {
                 attachedObject.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
                 attachedObject.GetComponent<Rigidbody>().AddForce(GameManager.playerTrans.forward * shootForce, ForceMode.Impulse);
@@ -48,7 +51,7 @@ public class PlayerZeroGrav : MonoBehaviour
             return;
         }
         // attachedObject.GetComponent<Rigidbody>().AddForce(dir * speed * Time.deltaTime);
-        attachedObject.GetComponent<Rigidbody>().MovePosition(Vector3.MoveTowards(attachedObject.transform.position, targetHold.position, 0.15f));
+        attachedObject.GetComponent<Rigidbody>().MovePosition(Vector3.MoveTowards(attachedObject.transform.position, targetHold.position, 0.2f));
         attachedObject.GetComponent<Rigidbody>().MoveRotation(targetHold.rotation);
     }
 }
