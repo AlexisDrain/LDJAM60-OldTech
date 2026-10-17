@@ -5,7 +5,8 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     public float cameraDistanceFromPlayer = 12f;
-    public float horizontalMoveForce = 10f;
+    public float moveForce = 10f;
+    public float maxSpeed = 15f;
     public float torqueForce = 1f;
     public Rigidbody playerRigidbody;
     public Transform playerGraphics;
@@ -66,11 +67,14 @@ public class PlayerController : MonoBehaviour
         inputAxis.Normalize();
         if (Mathf.Abs(inputAxis.x) > 0) {
             // playerRigidbody.MovePosition(GameManager.playerTrans.position + (inputAxis * horizontalMoveForce * Time.deltaTime));
-            playerRigidbody.AddForce(GameManager.playerTrans.forward * horizontalMoveForce * inputAxis.x);
+            playerRigidbody.AddForce(GameManager.playerTrans.forward * moveForce * inputAxis.x);
         }
         if (Mathf.Abs(inputAxis.y) > 0) {
             // playerRigidbody.MovePosition(GameManager.playerTrans.position + (GameManager.playerTrans.up * horizontalMoveForce * inputAxis.y * Time.deltaTime));
-            playerRigidbody.AddForce(GameManager.playerTrans.up * horizontalMoveForce * inputAxis.y);
+            playerRigidbody.AddForce(GameManager.playerTrans.up * moveForce * inputAxis.y);
         }
+
+        // clamp speed
+        playerRigidbody.linearVelocity = Vector3.ClampMagnitude(playerRigidbody.linearVelocity, maxSpeed);
     }
 }
