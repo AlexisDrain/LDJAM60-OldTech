@@ -6,6 +6,7 @@ public class EntityHealth : MonoBehaviour
     private int _health;
     public int maxHealth;
     public bool bleed = false;
+    public GameObject spawnOnDeath;
     public int health {
         get {
             return _health;
@@ -31,6 +32,13 @@ public class EntityHealth : MonoBehaviour
             GameManager.particle_blood.Play();
         }
         if (health <= 0) {
+            if(spawnOnDeath) {
+                GameObject spawn = GameObject.Instantiate(spawnOnDeath);
+                if(spawn.GetComponent<Rigidbody>()) {
+                    spawn.GetComponent<Rigidbody>().MovePosition(transform.position);
+                }
+                spawn.transform.position = transform.position;
+            }
             gameObject.SetActive(false);
         }
     }

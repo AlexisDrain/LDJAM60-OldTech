@@ -25,15 +25,28 @@ public class PlayerInv : MonoBehaviour
     public List<TextMeshProUGUI> gunNumbers = new List<TextMeshProUGUI>();
     public List<TextMeshProUGUI> gunAmmoNumber= new List<TextMeshProUGUI>();
     public List<Sprite> crosshairs = new List<Sprite>();
+    public List<GameObject> gunsCanvas = new List<GameObject>();
     public List<GameObject> guns = new List<GameObject>();
     void Start() {
         foreach (GameObject gun in guns) {
             gun.SetActive(false);
         }
+        foreach (GameObject gunCan in gunsCanvas) {
+            if(gunCan) {
+                gunCan.SetActive(false);
+            }
+        }
         // starting game with no weapons
         guns[0].SetActive(true);
         crosshairImage.sprite = crosshairs[0];
         crosshairImagePhantom.sprite = crosshairs[0];
+    }
+    public void UpdateWeapons() {
+        for (var i = 0; i < playerHasWeapon.Count; i++) {
+            if (playerHasWeapon[i] == true && gunsCanvas[i] == true) {
+                gunsCanvas[i].SetActive(true);
+            }
+        }
     }
     public void DisableCurrentWeapon() {
         // pass
