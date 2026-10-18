@@ -44,6 +44,7 @@ public class PlayerZeroGrav : MonoBehaviour
             if (attachedObject != null) {
                 attachedObject.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
                 attachedObject.GetComponent<Rigidbody>().AddForce(GameManager.playerTrans.forward * shootForce, ForceMode.Impulse);
+                attachedObject.GetComponent<Moveable>().hurtOnNextImpact = true;
                 attachedObject = null;
                 GameManager.soundManager.SpawnLoudAudio(shootSFX);
             } else {

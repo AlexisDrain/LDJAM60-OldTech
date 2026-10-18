@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour {
     public static Pool pool_EnemyBullets;
     public static ParticleSystem particle_blood;
     public static GameObject tutorial_GrabObject;
+    public static GameObject tutorial_Move;
 
 
     public PlayerCheckpoint playerSpawn;
@@ -46,6 +47,8 @@ public class GameManager : MonoBehaviour {
         pool_EnemyBullets = transform.Find("Pool_EnemyBullets").GetComponent<Pool>();
         particle_blood = transform.Find("Blood").GetComponent<ParticleSystem>();
         tutorial_GrabObject = GameObject.Find("Tutorial_GrabObject");
+        tutorial_Move = GameObject.Find("Tutorial_Move");
+        tutorial_Move.SetActive(false);
 
         TeleportPlayer(playerSpawn);
         // GameManager.playerTrans.position = playerSpawn.position;
@@ -59,10 +62,22 @@ public class GameManager : MonoBehaviour {
             mainCamDark.gameObject.SetActive(false);
         }
 
-        if (newCheckpoint.spawnPlayerInThisRotation == true) {
-            GameManager.playerTrans.GetComponent<Rigidbody>().Move(newCheckpoint.transform.position, newCheckpoint.transform.rotation);
+        if(newCheckpoint.showMoveTutorial) {
+            tutorial_Move.SetActive(true);
         } else {
-            GameManager.playerTrans.GetComponent<Rigidbody>().MovePosition(newCheckpoint.transform.position);
+            tutorial_Move.SetActive(false); // not needed. just in case.
+        }
+
+        
+
+        GameManager.playerTrans.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+        GameManager.playerTrans.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
+
+        Vector3 newPos = new Vector3(newCheckpoint.transform.position.x, newCheckpoint.transform.position.y, 0f);
+        if (newCheckpoint.spawnPlayerInThisRotation == true) {
+            GameManager.playerTrans.GetComponent<Rigidbody>().Move(newPos, newCheckpoint.transform.rotation);
+        } else {
+            GameManager.playerTrans.GetComponent<Rigidbody>().MovePosition(newPos);
         }
         StartCoroutine(TeleportWait());
     }

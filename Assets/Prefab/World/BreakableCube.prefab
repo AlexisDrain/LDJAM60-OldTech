@@ -423,6 +423,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   battery: 0
+  breakOnMagnatude: 3
 --- !u!114 &953264028068735096
 MonoBehaviour:
   m_ObjectHideFlags: 0
