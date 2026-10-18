@@ -72,6 +72,27 @@ public class PlayerShoot : MonoBehaviour
                     GameManager.playerInv.DisableCurrentWeapon();
                 }
             }
+        }
+        if (myWeapon == Weapon.Shotgun) {
+            if (GameManager.playerActionsControls.Player.Shoot.WasPressedThisFrame()) {
+                // shoot()
+                if (ammo <= 0) {
+                    GameManager.soundManager.SpawnLoudAudio(emptySFX);
+                    return;
+                }
+                GameManager.soundManager.SpawnLoudAudio(shootSFX);
+                GameManager.playerTrans.GetComponent<Rigidbody>().AddForce(-GameManager.playerTrans.forward * 2f, ForceMode.Impulse);
+
+                for (int i = 0; i < 5; i ++) {
+                    GameObject bullet = GameManager.pool_PlayerBullets.Spawn(transform.position);
+                    bullet.GetComponent<BulletController>().direction = Quaternion.Euler(0f, 0f, Random.Range(-15f, +15f)) * GameManager.playerTrans.forward;
+                }
+
+                ammo -= 1;
+                if (ammo <= 0) {
+                    GameManager.playerInv.DisableCurrentWeapon();
+                }
+            }
 
         }
     }

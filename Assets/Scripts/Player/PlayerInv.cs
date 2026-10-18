@@ -8,7 +8,8 @@ public enum Weapon {
     zeroGravity,
     Pistol,
     MachineGun,
-    EnemyBullet
+    EnemyBullet,
+    Shotgun
 }
 public class PlayerInv : MonoBehaviour
 {
@@ -103,6 +104,9 @@ public class PlayerInv : MonoBehaviour
         }
         if (GameManager.playerActionsControls.Player.Weapon3.WasPressedThisFrame()) {
             SwitchToWeapon(3);
+        }
+        if (GameManager.playerActionsControls.Player.Weapon4.WasPressedThisFrame()) {
+            SwitchToWeapon(4);
         }
     }
 }

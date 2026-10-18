@@ -5,7 +5,8 @@ public enum Item {
     Revolver,
     MachineGun,
     ZeroGravity,
-    Health
+    Health,
+    Shotgun
 }
 
 public class ItemPickup : MonoBehaviour
@@ -31,6 +32,12 @@ public class ItemPickup : MonoBehaviour
                 GameManager.playerInv.SwitchToWeapon(3);
             }
             GameManager.playerInv.guns[3].GetComponent<PlayerShoot>().ammo += 20;
+        } else if (myItem == Item.Shotgun) {
+            if (GameManager.playerInv.playerHasWeapon[4] == false) {
+                GameManager.playerInv.playerHasWeapon[4] = true;
+                GameManager.playerInv.SwitchToWeapon(4);
+            }
+            GameManager.playerInv.guns[4].GetComponent<PlayerShoot>().ammo += 20;
         } else if (myItem == Item.Health) {
             GameManager.playerTrans.GetComponent<PlayerHealth>().DoHealth(100);
         }

@@ -22,7 +22,9 @@ public class BulletController : MonoBehaviour
             (hurtEnemy == false && other.CompareTag("Enemy"))) {
             return;
         }
-
+        if (other.GetComponent<Rigidbody>()) {
+            other.GetComponent<Rigidbody>().AddForce(direction, ForceMode.Impulse);
+        }
         if (other.GetComponent<EntityHealth>()) {
             other.GetComponent<EntityHealth>().DoDamage(damage);
         }
