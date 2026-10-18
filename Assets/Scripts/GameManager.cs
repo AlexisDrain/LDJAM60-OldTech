@@ -5,7 +5,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
 
     public static bool playerIsAlive = true;
-    public static bool gameIsPaused = false;
+    public static bool startedGameOnce = false;
+    public static bool gameIsPaused = true;
     public static InputSystem_Actions playerActionsControls;
 
     public static GameManager myGameManager;
@@ -21,16 +22,17 @@ public class GameManager : MonoBehaviour {
     public static GameObject tutorial_GrabObject;
     public static GameObject tutorial_Move;
 
+    public static Canvas cheatMenuCanvas;
+    public static Canvas inGameCanvas;
+    public static Canvas mainMenuCanvas;
 
     public PlayerCheckpoint playerSpawn;
 
     void Awake()
     {
 
-        // Time.timeScale = 0f;
+        Time.timeScale = 0f;
 
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
         playerActionsControls = new InputSystem_Actions();
         playerActionsControls.Enable();
 
@@ -50,10 +52,53 @@ public class GameManager : MonoBehaviour {
         tutorial_Move = GameObject.Find("Tutorial_Move");
         tutorial_Move.SetActive(false);
 
+        cheatMenuCanvas = GameObject.Find("Canvas/MainMenu/CheatMenu").GetComponent<Canvas>();
+        cheatMenuCanvas.enabled = false;
+        inGameCanvas = GameObject.Find("Canvas/InGame").GetComponent<Canvas>();
+        inGameCanvas.enabled = false;
+        mainMenuCanvas = GameObject.Find("Canvas/MainMenu").GetComponent<Canvas>();
+
         TeleportPlayer(playerSpawn);
         // GameManager.playerTrans.position = playerSpawn.position;
     }
-    public void TeleportPlayer(PlayerCheckpoint newCheckpoint) {
+    private void Update() {
+        if(GameManager.startedGameOnce == false) {
+            return;
+        }
+        if(GameManager.playerActionsControls.Player.Pause.WasPressedThisFrame()) {
+            if(GameManager.gameIsPaused == false) {
+                PauseGame();
+            } else {
+                ResumeGame();
+            }
+        }
+    }
+    public void StartGame() {
+        GameManager.gameIsPaused = false;
+        GameManager.startedGameOnce = true;
+        Time.timeScale = 1f;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        inGameCanvas.enabled = true;
+        mainMenuCanvas.enabled = false;
+    }
+    public void ResumeGame() {
+        GameManager.gameIsPaused = false;
+        Time.timeScale = 1f;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        inGameCanvas.enabled = true;
+        mainMenuCanvas.enabled = false;
+    }
+    public void PauseGame() {
+        GameManager.gameIsPaused = true;
+        Time.timeScale = 0f;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        inGameCanvas.enabled = false;
+        mainMenuCanvas.enabled = true;
+    }
+    public static void TeleportPlayer(PlayerCheckpoint newCheckpoint) {
         if(newCheckpoint.darkLevel == true) {
             mainCamLight.gameObject.SetActive(false);
             mainCamDark.gameObject.SetActive(true);
@@ -79,7 +124,7 @@ public class GameManager : MonoBehaviour {
         } else {
             GameManager.playerTrans.GetComponent<Rigidbody>().MovePosition(newPos);
         }
-        StartCoroutine(TeleportWait());
+        GameManager.myGameManager.StartCoroutine(GameManager.myGameManager.TeleportWait());
     }
     private IEnumerator TeleportWait() {
         GameManager.playerTrail.enabled = false;

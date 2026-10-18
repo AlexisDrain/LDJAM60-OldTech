@@ -26,7 +26,7 @@ public class PlayerZeroGrav : MonoBehaviour
     public void Update() {
 
         Physics.Raycast(GameManager.playerTrans.position, GameManager.playerTrans.forward, out hit, 8f);
-        if(hit.collider && hit.collider.GetComponent<Moveable>()) {
+        if(hit.collider && (hit.collider.GetComponent<Moveable>() || hit.collider.GetComponent<ItemPickup>())) {
             lookingAtObject = hit.collider.gameObject;
             crosshairLine.startColor = new Color(0f, 0.66f, 1f);
             if(attachedObject == null) {
@@ -49,7 +49,12 @@ public class PlayerZeroGrav : MonoBehaviour
                 GameManager.soundManager.SpawnLoudAudio(shootSFX);
             } else {
                 if(lookingAtObject) {
-                    attachedObject = lookingAtObject;
+                    if(lookingAtObject.GetComponent<ItemPickup>()) {
+                        lookingAtObject.GetComponent<ItemPickup>().TryPickup();
+                    }
+                    if (lookingAtObject.GetComponent<Moveable>()) {
+                        attachedObject = lookingAtObject;
+                    }
                 } else {
                     GameManager.soundManager.SpawnLoudAudio(failSFX);
                 }

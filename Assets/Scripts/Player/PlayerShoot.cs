@@ -34,7 +34,7 @@ public class PlayerShoot : MonoBehaviour
     private void Update() {
         if (myWeapon == Weapon.MachineGun) {
 
-            if (GameManager.playerActionsControls.Player.Shoot.IsPressed() && currentNextShotTime <= 0f) {
+            if (GameManager.playerActionsControls.Player.Shoot.IsPressed() && currentNextShotTime <= 0f) { // can hold down weapon
                 currentNextShotTime = defaultNextShotTime;
 
                 // shoot()
