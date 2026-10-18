@@ -17,6 +17,7 @@ public class PlayerZeroGrav : MonoBehaviour
     }
     public void RemoveAttachedObject() {
         attachedObject = null;
+        GameManager.tutorial_GrabObject.SetActive(false);
     }
     private void OnDisable() {
         RemoveAttachedObject();
@@ -28,9 +29,15 @@ public class PlayerZeroGrav : MonoBehaviour
         if(hit.collider && hit.collider.GetComponent<Moveable>()) {
             lookingAtObject = hit.collider.gameObject;
             crosshairLine.startColor = new Color(0f, 0.66f, 1f);
+            if(attachedObject == null) {
+                GameManager.tutorial_GrabObject.SetActive(true);
+            } else {
+                GameManager.tutorial_GrabObject.SetActive(false);
+            }
         } else {
             lookingAtObject = null;
             crosshairLine.startColor = Color.white;
+            GameManager.tutorial_GrabObject.SetActive(false);
         }
 
         if(GameManager.playerActionsControls.Player.Shoot.WasPressedThisFrame()) {
