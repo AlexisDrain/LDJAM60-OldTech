@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour {
     public static Transform playerTrans;
     public static PlayerInv playerInv;
     public static Camera mainCamLight;
+    public static Camera mainCamDark;
     public static Pool pool_PlayerBullets;
     public static Pool pool_EnemyBullets;
     public static ParticleSystem particle_blood;
@@ -34,6 +35,8 @@ public class GameManager : MonoBehaviour {
         playerInv = GameObject.Find("PlayerDolly").GetComponent<PlayerInv>();
         playerTrans = GameObject.Find("Player").transform;
         mainCamLight = GameObject.Find("MainCameraLight").GetComponent<Camera>();
+        mainCamDark = GameObject.Find("MainCameraDark").GetComponent<Camera>();
+        mainCamDark.gameObject.SetActive(false);
         pool_PlayerBullets = transform.Find("Pool_PlayerBullets").GetComponent<Pool>();
         pool_EnemyBullets = transform.Find("Pool_EnemyBullets").GetComponent<Pool>();
         particle_blood = transform.Find("Blood").GetComponent<ParticleSystem>();

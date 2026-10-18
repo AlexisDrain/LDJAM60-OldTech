@@ -21,7 +21,8 @@ public class PlayerController : MonoBehaviour
     private Vector2 keyboardLook;
     void Start()
     {
-
+        GameManager.mainCamLight.transform.localPosition = new Vector3 (cameraDistanceFromPlayer, GameManager.mainCamLight.transform.localPosition.y, GameManager.mainCamLight.transform.localPosition.z);
+        GameManager.mainCamDark.transform.localPosition = new Vector3(cameraDistanceFromPlayer, GameManager.mainCamLight.transform.localPosition.y, GameManager.mainCamLight.transform.localPosition.z);
     }
     private void LateUpdate() {
         // playerGraphics.position = Vector3.Lerp(playerGraphics.position, playerRigidbody.position, 30f * Time.deltaTime);

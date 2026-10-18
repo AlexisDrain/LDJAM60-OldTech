@@ -4,7 +4,8 @@ public enum Item {
     None,
     Revolver,
     MachineGun,
-    ZeroGravity
+    ZeroGravity,
+    Health
 }
 
 public class ItemPickup : MonoBehaviour
@@ -30,6 +31,8 @@ public class ItemPickup : MonoBehaviour
                 GameManager.playerInv.SwitchToWeapon(3);
             }
             GameManager.playerInv.guns[3].GetComponent<PlayerShoot>().ammo += 20;
+        } else if (myItem == Item.Health) {
+            GameManager.playerTrans.GetComponent<PlayerHealth>().DoHealth(100);
         }
         GameManager.soundManager.SpawnLoudAudio(pickupItem);
         gameObject.SetActive(false);
