@@ -7,7 +7,8 @@ public enum Weapon {
     None,
     zeroGravity,
     Pistol,
-    MachineGun
+    MachineGun,
+    EnemyBullet
 }
 public class PlayerInv : MonoBehaviour
 {
