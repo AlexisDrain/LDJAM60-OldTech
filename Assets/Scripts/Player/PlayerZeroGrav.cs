@@ -15,8 +15,11 @@ public class PlayerZeroGrav : MonoBehaviour
     void Start() {
 
     }
-    private void OnDisable() {
+    public void RemoveAttachedObject() {
         attachedObject = null;
+    }
+    private void OnDisable() {
+        RemoveAttachedObject();
     }
     RaycastHit hit;
     public void Update() {

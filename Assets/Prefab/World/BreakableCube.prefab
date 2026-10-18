@@ -435,4 +435,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf1cf29ad7953d945a1e6477a87167f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  maxHealth: 20
+  maxHealth: 10
+  bleed: 0
+  spawnOnDeath: {fileID: 0}

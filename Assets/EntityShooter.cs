@@ -24,7 +24,7 @@ public class EntityShooter : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
+    RaycastHit hit;
     void FixedUpdate()
     {
         if (currentReloadDelay > 0f) {
@@ -32,6 +32,10 @@ public class EntityShooter : MonoBehaviour
         } else {
             currentReloadDelay = defaultReloadDelay;
             if (Vector2.Distance(bulletStart.position, GameManager.playerTrans.position) < shootDistance) {
+                Physics.Linecast(bulletStart.position, GameManager.playerTrans.position, out hit);
+                if (hit.collider.CompareTag("Player") == false) {
+                    return;
+                }
                 if (myWeapon == Weapon.EnemyBullet) {
                     StartCoroutine("ShootPattern1");
                 }/*
