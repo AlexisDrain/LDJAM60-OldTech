@@ -24,6 +24,10 @@ public class PlayerHealth : MonoBehaviour
             print("Damage shouldn't be negative");
         }
         health -= damage;
+
+        GameManager.particle_blood.transform.position = transform.position;
+        GameManager.particle_blood.Play();
+
         if (health <= 0) {
             GameManager.playerIsAlive = false;
             // gameObject.SetActive(false);

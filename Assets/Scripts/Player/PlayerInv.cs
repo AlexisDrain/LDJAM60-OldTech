@@ -18,6 +18,7 @@ public class PlayerInv : MonoBehaviour
     [Header("Setup once")]
     public Image crosshairImage;
     public Image crosshairImagePhantom;
+    public Image infinitySign;
 
     public List<bool> playerHasWeapon = new List<bool>();
     public List<Image> gunBGs = new List<Image>();
@@ -74,8 +75,10 @@ public class PlayerInv : MonoBehaviour
 
         if (newSlot == 1) {
             crosshairImagePhantom.rectTransform.anchoredPosition = new Vector2(0f, 0f);
+            infinitySign.color = new Color(0f, 0.66f, 1f);
         } else {
             crosshairImagePhantom.rectTransform.anchoredPosition = new Vector2(120f, 0f);
+            infinitySign.color = Color.white;
         }
     }
     private void Update() {

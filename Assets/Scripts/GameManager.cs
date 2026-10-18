@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour {
     public static Camera mainCamLight;
     public static Pool pool_PlayerBullets;
     public static Pool pool_EnemyBullets;
+    public static ParticleSystem particle_blood;
     
     public Transform playerSpawn;
 
@@ -35,6 +36,7 @@ public class GameManager : MonoBehaviour {
         mainCamLight = GameObject.Find("MainCameraLight").GetComponent<Camera>();
         pool_PlayerBullets = transform.Find("Pool_PlayerBullets").GetComponent<Pool>();
         pool_EnemyBullets = transform.Find("Pool_EnemyBullets").GetComponent<Pool>();
+        particle_blood = transform.Find("Blood").GetComponent<ParticleSystem>();
 
         GameManager.playerTrans.GetComponent<Rigidbody>().Move(playerSpawn.position, playerSpawn.rotation);
         // GameManager.playerTrans.position = playerSpawn.position;
