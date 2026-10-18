@@ -6,7 +6,7 @@ public class LookAtTarget : MonoBehaviour
     public float lerpSpeed = 1f;
     public bool targetIsPlayer;
     public Transform target;
-    public Rigidbody myRigidbody;
+    // public Rigidbody myRigidbody;
     public SpriteRenderer mySprite;
     public bool flipYIfUnder = false;
     void Start()
