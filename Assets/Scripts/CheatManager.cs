@@ -7,6 +7,9 @@ public class CheatManager : MonoBehaviour
     /* Alexis Clay Drain */
     public void GetGun(int idx) {
         GameManager.playerInv.playerHasWeapon[idx] = true;
+        if (GameManager.playerInv.guns[idx].GetComponent<PlayerShoot>()) {
+            GameManager.playerInv.guns[idx].GetComponent<PlayerShoot>().ResetAmmo();
+        }
         GameManager.playerInv.UpdateWeapons();
     }
     public void SpawnPlayer(GameObject newLevel) {

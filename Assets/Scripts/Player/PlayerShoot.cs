@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerShoot : MonoBehaviour
 {
     /* Alexis Clay Drain */
-    private int _ammo = 99;
+    private int _ammo = 0;
     public int ammo {
         get {
             return _ammo;
@@ -16,6 +16,7 @@ public class PlayerShoot : MonoBehaviour
         }
     }
     public Weapon myWeapon;
+    public int startAmmo = 0;
     public TextMeshProUGUI ammoCounter;
     public AudioClip emptySFX;
     public AudioClip shootSFX;
@@ -30,6 +31,9 @@ public class PlayerShoot : MonoBehaviour
         if (currentNextShotTime > 0f) {
             currentNextShotTime -= Time.deltaTime;
         }
+    }
+    public void ResetAmmo() {
+        ammo = startAmmo;
     }
     private void Update() {
 

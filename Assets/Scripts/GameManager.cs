@@ -116,6 +116,13 @@ public class GameManager : MonoBehaviour {
         tutorial_Respawn.SetActive(false);
         GameManager.StartLevel(currentLevelIdx);
         GameManager.particle_blood.Clear();
+
+        for (var i = 2; i < 5; i++) {
+            if (GameManager.playerInv.playerHasWeapon[i]) {
+                GameManager.playerInv.guns[i].GetComponent<PlayerShoot>().ResetAmmo();
+            }
+
+        }
     }
     public void StartGame() {
         GameManager.gameIsPaused = false;
@@ -124,7 +131,7 @@ public class GameManager : MonoBehaviour {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         inGameCanvas.enabled = true;
-        mainMenuCanvas.enabled = false;
+        mainMenuCanvas.gameObject.SetActive(false);
     }
     public void ResumeGame() {
         GameManager.gameIsPaused = false;
@@ -132,7 +139,7 @@ public class GameManager : MonoBehaviour {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         inGameCanvas.enabled = true;
-        mainMenuCanvas.enabled = false;
+        mainMenuCanvas.gameObject.SetActive(false);
     }
     public void PauseGame() {
         GameManager.gameIsPaused = true;
@@ -140,7 +147,7 @@ public class GameManager : MonoBehaviour {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         inGameCanvas.enabled = false;
-        mainMenuCanvas.enabled = true;
+        mainMenuCanvas.gameObject.SetActive(true);
     }
     public static void StartLevel(int levelIdx) {
         GameManager.myGameManager.currentLevelIdx = levelIdx;

@@ -24,20 +24,26 @@ public class ItemPickup : MonoBehaviour
             if (GameManager.playerInv.playerHasWeapon[2] == false) {
                 GameManager.playerInv.playerHasWeapon[2] = true;
                 GameManager.playerInv.SwitchToWeapon(2);
+                GameManager.playerInv.guns[2].GetComponent<PlayerShoot>().ResetAmmo();
+            } else {
+                GameManager.playerInv.guns[2].GetComponent<PlayerShoot>().ammo += 40;
             }
-            GameManager.playerInv.guns[2].GetComponent<PlayerShoot>().ammo += 20;
         } else if (myItem == Item.MachineGun) {
             if (GameManager.playerInv.playerHasWeapon[3] == false) {
                 GameManager.playerInv.playerHasWeapon[3] = true;
                 GameManager.playerInv.SwitchToWeapon(3);
+                GameManager.playerInv.guns[3].GetComponent<PlayerShoot>().ResetAmmo();
+            } else {
+                GameManager.playerInv.guns[3].GetComponent<PlayerShoot>().ammo += 20;
             }
-            GameManager.playerInv.guns[3].GetComponent<PlayerShoot>().ammo += 20;
         } else if (myItem == Item.Shotgun) {
             if (GameManager.playerInv.playerHasWeapon[4] == false) {
                 GameManager.playerInv.playerHasWeapon[4] = true;
                 GameManager.playerInv.SwitchToWeapon(4);
+                GameManager.playerInv.guns[4].GetComponent<PlayerShoot>().ResetAmmo();
+            } else {
+                GameManager.playerInv.guns[4].GetComponent<PlayerShoot>().ammo += 10;
             }
-            GameManager.playerInv.guns[4].GetComponent<PlayerShoot>().ammo += 20;
         } else if (myItem == Item.Health) {
             GameManager.playerTrans.GetComponent<PlayerHealth>().DoHealth(100);
         }
