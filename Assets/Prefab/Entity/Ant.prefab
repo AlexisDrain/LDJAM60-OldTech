@@ -304,6 +304,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EntityHealth
   maxHealth: 1
   bleed: 1
+  onHurt:
+    m_PersistentCalls:
+      m_Calls: []
   spawnOnDeath: {fileID: 0}
 --- !u!135 &7869278530004057518
 SphereCollider:
@@ -377,5 +380,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3512e6de9105b95419b06b3872d4fa28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EntityMoveToPlayer
-  seeDistance: 10
+  seeDistance: 15
   movementSpeed: 0.1

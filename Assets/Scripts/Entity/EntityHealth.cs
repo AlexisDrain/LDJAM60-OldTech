@@ -7,7 +7,8 @@ public class EntityHealth : MonoBehaviour
     private int _health;
     public int maxHealth;
     public bool bleed = false;
-    public UnityEvent onHurt; 
+    public UnityEvent onHurt;
+    public UnityEvent onKill;
     public GameObject spawnOnDeath;
     public int health {
         get {
@@ -35,8 +36,9 @@ public class EntityHealth : MonoBehaviour
             GameManager.particle_blood.Play();
         }
         if (health <= 0) {
-            if(spawnOnDeath) {
-                GameObject spawn = GameObject.Instantiate(spawnOnDeath);
+            onKill.Invoke();
+            if (spawnOnDeath) {
+                GameObject spawn = GameObject.Instantiate(spawnOnDeath, transform.position, Quaternion.identity, GameManager.myGameManager._currentLevel.transform);
                 if(spawn.GetComponent<Rigidbody>()) {
                     spawn.GetComponent<Rigidbody>().MovePosition(transform.position);
                 }

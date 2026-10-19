@@ -43,11 +43,30 @@ public class PlayerInv : MonoBehaviour
         crosshairImagePhantom.sprite = crosshairs[0];
     }
     public void UpdateWeapons() {
-        for (var i = 0; i < playerHasWeapon.Count; i++) {
+        for (var i = 1; i < playerHasWeapon.Count; i++) {
             if (playerHasWeapon[i] == true && gunsCanvas[i] == true) {
                 gunsCanvas[i].SetActive(true);
+            } else {
+                gunsCanvas[i].SetActive(false);
             }
         }
+    }
+    public void StripGravityGun() {
+
+        playerHasWeapon[1] = false;
+        guns[1].SetActive(false);
+        UpdateWeapons();
+        SwitchToWeapon(1);
+    }
+    public void StripWeaponsExceptGravity() {
+
+        for (var i = 2; i < playerHasWeapon.Count; i++) {
+            playerHasWeapon[i] = false;
+            guns[i].GetComponent<PlayerShoot>().ResetAmmo();
+            guns[i].SetActive(false);
+        }
+        UpdateWeapons();
+        SwitchToWeapon(1);
     }
     public void DisableCurrentWeapon() {
         // pass

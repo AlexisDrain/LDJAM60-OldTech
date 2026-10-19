@@ -18,7 +18,7 @@ public class CheatManager : MonoBehaviour
     public void Update() {
 
         if (GameManager.playerActionsControls.Player.CheatMenu.WasPressedThisDynamicUpdate()) {
-            GameManager.cheatMenuCanvas.enabled = true;
+            GameManager.cheatMenuCanvas.gameObject.SetActive(true);
             if(GameManager.gameIsPaused == false) {
                 GameManager.myGameManager.PauseGame();
             }

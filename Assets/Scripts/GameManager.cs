@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
@@ -9,8 +12,10 @@ public class GameManager : MonoBehaviour {
     public static bool playerIsAlive = true;
     public static bool startedGameOnce = false;
     public static bool gameIsPaused = true;
+    public static bool gameIsEnded = false;
     public static UnityEvent playerRevive;
     public static LayerMask layerMask_Trigger;
+    public static EventSystem eventSystem;
     public static InputSystem_Actions playerActionsControls;
 
     public static GameManager myGameManager;
@@ -27,11 +32,17 @@ public class GameManager : MonoBehaviour {
     public static GameObject tutorial_Move;
     public static GameObject tutorial_Respawn;
 
+    public static Image bg_firstLaunch;
+    public static GameObject button_StartGame;
+    public static GameObject button_Resume;
+    public static GameObject button_CreditsBack;
+    public static GameObject creditsMenu;
     public static Canvas cheatMenuCanvas;
     public static Canvas inGameCanvas;
     public static Canvas mainMenuCanvas;
     public static Image bossHealthFill;
     public static GameObject bossHealth;
+    public static EndingCutscene endingCutscene;
 
     public int currentLevelIdx = 0;
     public List<GameObject> levelList;
@@ -46,9 +57,9 @@ public class GameManager : MonoBehaviour {
 
         playerActionsControls = new InputSystem_Actions();
         playerActionsControls.Enable();
-
+        
         layerMask_Trigger = LayerMask.NameToLayer("Trigger");
-
+        eventSystem = transform.Find("EventSystem").GetComponent<EventSystem>();
         myGameManager = GetComponent<GameManager>();
         soundManager = GetComponent<SoundManager>();
         soundManager.Init();
@@ -67,28 +78,38 @@ public class GameManager : MonoBehaviour {
         tutorial_Respawn = GameObject.Find("Tutorial_Respawn");
         tutorial_Respawn.SetActive(false);
 
+        bg_firstLaunch = GameObject.Find("Canvas/MainMenu/BG_FirstLaunch").GetComponent<Image>();
+        button_StartGame = GameObject.Find("Canvas/MainMenu/StartGame");
+        button_Resume = GameObject.Find("Canvas/MainMenu/ResumeGame");
+        button_Resume.SetActive(false);
+        button_CreditsBack = GameObject.Find("Canvas/CreditsMenu/Button_CreditsBack");
+
+        GameObject.Find("Canvas/CreditsMenu/GameVersion").GetComponent<TextMeshProUGUI>().text = $"Version: {Application.version.ToString()}";
+        creditsMenu = GameObject.Find("Canvas/CreditsMenu");
+        creditsMenu.SetActive(false);
         cheatMenuCanvas = GameObject.Find("Canvas/MainMenu/CheatMenu").GetComponent<Canvas>();
-        cheatMenuCanvas.enabled = false;
+        cheatMenuCanvas.gameObject.SetActive(false);
         inGameCanvas = GameObject.Find("Canvas/InGame").GetComponent<Canvas>();
         inGameCanvas.enabled = false;
         mainMenuCanvas = GameObject.Find("Canvas/MainMenu").GetComponent<Canvas>();
-        bossHealthFill = GameObject.Find("Canvas/BossHealth/BossHealthFill").GetComponent<Image>();
-        bossHealth = GameObject.Find("Canvas/BossHealth");
+        bossHealthFill = GameObject.Find("Canvas/InGame/BossHealth/BossHealthFill").GetComponent<Image>();
+        bossHealth = GameObject.Find("Canvas/InGame/BossHealth");
         bossHealth.SetActive(false);
+        endingCutscene = GameObject.Find("Canvas/Ending").GetComponent<EndingCutscene>();
+        endingCutscene.gameObject.SetActive(false);
 
         GameObject devLevels = GameObject.Find("DevLevels");
         if(devLevels) {
             Destroy(devLevels);
         }
 
-        StartLevel(0);
+        // button_StartGame.GetComponent<Selectable>().Select();
+
+        // StartLevel(0);
         // GameManager.playerTrans.position = playerSpawn.position;
     }
     private void Update() {
-        if(GameManager.startedGameOnce == false) {
-            return;
-        }
-        if (GameManager.playerIsAlive == false) {
+        if (GameManager.playerIsAlive == false && GameManager.gameIsPaused == false) {
             if (GameManager.playerActionsControls.Player.Respawn.WasPressedThisFrame()) {
             //|| (GameManager.canRespawnWithShoot <= 0f && GameManager.playerActionsControls.Player.Shoot.WasPressedThisFrame())) {
                 RespawnPlayer();
@@ -96,6 +117,15 @@ public class GameManager : MonoBehaviour {
         }
 
         if(GameManager.playerActionsControls.Player.Pause.WasPressedThisFrame()) {
+            if(GameManager.creditsMenu.activeSelf == true) {
+                GameManager.ToggleCreditsMenu(false);
+                return;
+            }
+
+            if(GameManager.startedGameOnce == false) {
+                return;
+            }
+
             if(GameManager.gameIsPaused == false) {
                 PauseGame();
             } else {
@@ -130,9 +160,36 @@ public class GameManager : MonoBehaviour {
 
         }
     }
+    public static void ToggleCreditsMenu(bool newState) {
+        if(newState == true) {
+            creditsMenu.SetActive(true);
+            mainMenuCanvas.gameObject.SetActive(false);
+            button_CreditsBack.GetComponent<Selectable>().Select();
+        } else {
+            creditsMenu.SetActive(false);
+            mainMenuCanvas.gameObject.SetActive(true);
+            button_Resume.GetComponent<Selectable>().Select();
+        }
+    }
+    public static void BeatFinalBoss() {
+        gameIsEnded = true;
+        GameManager.playerInv.StripGravityGun();
+        GameManager.playerInv.StripWeaponsExceptGravity();
+        bg_firstLaunch.gameObject.SetActive(true);
+        button_Resume.SetActive(false);
+        button_StartGame.SetActive(true);
+
+        endingCutscene.InvokeEnding();
+    }
+    public static void RestartGameScene() {
+        playerActionsControls.Disable();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
     public void StartGame() {
         GameManager.gameIsPaused = false;
         GameManager.startedGameOnce = true;
+        bg_firstLaunch.gameObject.SetActive(false);
+        StartLevel(0);
         Time.timeScale = 1f;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -149,11 +206,16 @@ public class GameManager : MonoBehaviour {
     }
     public void PauseGame() {
         GameManager.gameIsPaused = true;
+        button_Resume.GetComponent<Selectable>().Select();
+
         Time.timeScale = 0f;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         inGameCanvas.enabled = false;
         mainMenuCanvas.gameObject.SetActive(true);
+    }
+    public static void ApplyOptions() {
+        print("hello");
     }
     public static void StartLevel(int levelIdx) {
         GameManager.myGameManager.currentLevelIdx = levelIdx;
@@ -164,12 +226,21 @@ public class GameManager : MonoBehaviour {
         GameManager.myGameManager._currentLevel = GameObject.Instantiate(newLevel);
 
         // reset stats
+        
         GameManager.bossHealth.SetActive(false);
         GameManager.playerTrans.GetComponent<PlayerHealth>().health = 100;
+        GameManager.playerInv.guns[1].GetComponent<PlayerZeroGrav>().RemoveAttachedObject();
 
         PlayerCheckpoint newCheckpoint = newLevel.GetComponent<LevelProperties>().myCheckpoint;
 
         GameManager.myGameManager._currentPlayerSpawn = newCheckpoint;
+
+        if(newLevel.GetComponent<LevelProperties>().stripWeaponsExceptGravity) {
+            GameManager.playerInv.StripWeaponsExceptGravity();
+        }
+        if (newLevel.GetComponent<LevelProperties>().stripGravity) {
+            GameManager.playerInv.StripGravityGun();
+        }
 
         if (newCheckpoint.darkLevel == true) {
             mainCamLight.gameObject.SetActive(false);
