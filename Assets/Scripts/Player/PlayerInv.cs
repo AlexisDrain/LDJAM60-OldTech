@@ -20,6 +20,7 @@ public class PlayerInv : MonoBehaviour
     public Image crosshairImage;
     public Image crosshairImagePhantom;
     public Image infinitySign;
+    public AudioClip switchWeaponSFX;
 
     public List<bool> playerHasWeapon = new List<bool>();
     public List<Image> gunBGs = new List<Image>();
@@ -76,6 +77,10 @@ public class PlayerInv : MonoBehaviour
             return;
         }
         currentSlot = newSlot;
+
+        if(newSlot != 0) {
+            GameManager.soundManager.SpawnLoudAudio(switchWeaponSFX);
+        }
 
         foreach(GameObject gun in guns) {
             gun.SetActive(false);

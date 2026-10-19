@@ -19,7 +19,11 @@ public class PlayerZeroGrav : MonoBehaviour
     }
     public void RemoveAttachedObject() {
         attachedObject = null;
-        if(GameManager.tutorial_GrabObject) {
+        print(attachedObject);
+        holdLoopAudio.Stop();
+        lightningLine.StartPosition = Vector3.zero;
+        lightningLine.EndPosition = Vector3.zero;
+        if (GameManager.tutorial_GrabObject) {
             GameManager.tutorial_GrabObject.SetActive(false);
         }
     }

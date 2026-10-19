@@ -20,7 +20,7 @@ public class EndingCutscene : MonoBehaviour
     private IEnumerator CountdownEnding() {
         // GameManager.reduceMusicVolumeHotlineMiami = true;
         myAnimator.SetTrigger("StartEnding");
-        // yield return new WaitForSeconds(11f);
+        yield return new WaitForSecondsRealtime(2f);
         typeDialogue.CreateNewText(4);
         yield return new WaitForSecondsRealtime(8f);
         button_restartGame.gameObject.SetActive(true);

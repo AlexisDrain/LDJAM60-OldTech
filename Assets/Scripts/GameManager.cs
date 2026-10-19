@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour {
     public static Image bg_firstLaunch;
     public static GameObject button_StartGame;
     public static GameObject button_Resume;
+    public static GameObject button_RestartLevel;
     public static GameObject button_CreditsBack;
     public static GameObject creditsMenu;
     public static Canvas cheatMenuCanvas;
@@ -54,6 +55,10 @@ public class GameManager : MonoBehaviour {
     {
 
         Time.timeScale = 0f;
+        playerIsAlive = true;
+        startedGameOnce = false;
+        gameIsPaused = true;
+        gameIsEnded = false;
 
         playerActionsControls = new InputSystem_Actions();
         playerActionsControls.Enable();
@@ -82,6 +87,8 @@ public class GameManager : MonoBehaviour {
         button_StartGame = GameObject.Find("Canvas/MainMenu/StartGame");
         button_Resume = GameObject.Find("Canvas/MainMenu/ResumeGame");
         button_Resume.SetActive(false);
+        button_RestartLevel = GameObject.Find("Canvas/MainMenu/RestartLevel");
+        button_RestartLevel.SetActive(false);
         button_CreditsBack = GameObject.Find("Canvas/CreditsMenu/Button_CreditsBack");
 
         GameObject.Find("Canvas/CreditsMenu/GameVersion").GetComponent<TextMeshProUGUI>().text = $"Version: {Application.version.ToString()}";
@@ -102,7 +109,7 @@ public class GameManager : MonoBehaviour {
         if(devLevels) {
             Destroy(devLevels);
         }
-
+        Cursor.visible = false;
         // button_StartGame.GetComponent<Selectable>().Select();
 
         // StartLevel(0);
@@ -168,7 +175,11 @@ public class GameManager : MonoBehaviour {
         } else {
             creditsMenu.SetActive(false);
             mainMenuCanvas.gameObject.SetActive(true);
-            button_Resume.GetComponent<Selectable>().Select();
+            if(startedGameOnce) {
+                button_Resume.GetComponent<Selectable>().Select();
+            } else {
+                button_StartGame.GetComponent<Selectable>().Select();
+            }
         }
     }
     public static void BeatFinalBoss() {
@@ -178,6 +189,8 @@ public class GameManager : MonoBehaviour {
         bg_firstLaunch.gameObject.SetActive(true);
         button_Resume.SetActive(false);
         button_StartGame.SetActive(true);
+
+        Time.timeScale = 0f;
 
         endingCutscene.InvokeEnding();
     }
@@ -189,9 +202,12 @@ public class GameManager : MonoBehaviour {
         GameManager.gameIsPaused = false;
         GameManager.startedGameOnce = true;
         bg_firstLaunch.gameObject.SetActive(false);
+        button_StartGame.SetActive(false);
+        button_RestartLevel.SetActive(true);
+        button_Resume.SetActive(true);
         StartLevel(0);
         Time.timeScale = 1f;
-        Cursor.visible = false;
+        // Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         inGameCanvas.enabled = true;
         mainMenuCanvas.gameObject.SetActive(false);
@@ -199,7 +215,7 @@ public class GameManager : MonoBehaviour {
     public void ResumeGame() {
         GameManager.gameIsPaused = false;
         Time.timeScale = 1f;
-        Cursor.visible = false;
+        // Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         inGameCanvas.enabled = true;
         mainMenuCanvas.gameObject.SetActive(false);
@@ -209,13 +225,16 @@ public class GameManager : MonoBehaviour {
         button_Resume.GetComponent<Selectable>().Select();
 
         Time.timeScale = 0f;
-        Cursor.visible = true;
+        // Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         inGameCanvas.enabled = false;
         mainMenuCanvas.gameObject.SetActive(true);
     }
     public static void ApplyOptions() {
         print("hello");
+    }
+    public static void RestartLevel() {
+        StartLevel(GameManager.myGameManager.currentLevelIdx);
     }
     public static void StartLevel(int levelIdx) {
         GameManager.myGameManager.currentLevelIdx = levelIdx;

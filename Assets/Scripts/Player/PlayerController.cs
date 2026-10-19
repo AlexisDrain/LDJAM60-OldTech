@@ -60,6 +60,7 @@ public class PlayerController : MonoBehaviour
         //if (Input.GetMouseButtonDown(0)) {
         if (GameManager.playerActionsControls.UI.Click.WasPressedThisFrame()) {
             Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
 
         pointerDelta = GameManager.playerActionsControls.Player.Look.ReadValue<Vector2>();

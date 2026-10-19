@@ -108,4 +108,9 @@ Bebas by Dharma Type (Menues font):
 https://www.dafont.com/bebas.font  
 http://dharmatype.com  
 
+LiberationSans by Red Hat - OFL (Credits font):  
+https://www.dafont.com/liberation-sans.font  
+
+
+
 Hint: Press "Ctrl+H" to unlock cheats in main menu!
