@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
@@ -29,6 +30,8 @@ public class GameManager : MonoBehaviour {
     public static Canvas cheatMenuCanvas;
     public static Canvas inGameCanvas;
     public static Canvas mainMenuCanvas;
+    public static Image bossHealthFill;
+    public static GameObject bossHealth;
 
     public int currentLevelIdx = 0;
     public List<GameObject> levelList;
@@ -69,6 +72,9 @@ public class GameManager : MonoBehaviour {
         inGameCanvas = GameObject.Find("Canvas/InGame").GetComponent<Canvas>();
         inGameCanvas.enabled = false;
         mainMenuCanvas = GameObject.Find("Canvas/MainMenu").GetComponent<Canvas>();
+        bossHealthFill = GameObject.Find("Canvas/BossHealth/BossHealthFill").GetComponent<Image>();
+        bossHealth = GameObject.Find("Canvas/BossHealth");
+        bossHealth.SetActive(false);
 
         GameObject devLevels = GameObject.Find("DevLevels");
         if(devLevels) {
@@ -156,6 +162,10 @@ public class GameManager : MonoBehaviour {
     public static void TeleportPlayer(GameObject newLevel) {
         Destroy(GameManager.myGameManager._currentLevel);
         GameManager.myGameManager._currentLevel = GameObject.Instantiate(newLevel);
+
+        // reset stats
+        GameManager.bossHealth.SetActive(false);
+        GameManager.playerTrans.GetComponent<PlayerHealth>().health = 100;
 
         PlayerCheckpoint newCheckpoint = newLevel.GetComponent<LevelProperties>().myCheckpoint;
 

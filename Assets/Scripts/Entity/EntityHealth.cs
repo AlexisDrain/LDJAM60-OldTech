@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EntityHealth : MonoBehaviour
 {
@@ -6,6 +7,7 @@ public class EntityHealth : MonoBehaviour
     private int _health;
     public int maxHealth;
     public bool bleed = false;
+    public UnityEvent onHurt; 
     public GameObject spawnOnDeath;
     public int health {
         get {
@@ -26,6 +28,7 @@ public class EntityHealth : MonoBehaviour
             damage = -damage;
             print("Damage shouldn't be negative");
         }
+        onHurt.Invoke();
         health -= damage;
         if(bleed == true) {
             GameManager.particle_blood.transform.position = transform.position;
