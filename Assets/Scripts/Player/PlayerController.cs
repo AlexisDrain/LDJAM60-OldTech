@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
         }
         */
 
-        if (GameManager.gameIsPaused == true || GameManager.playerIsAlive == false) {
+        if (GameManager.gameIsPaused == true || GameManager.playerIsAlive == false || GameManager.gameIsEnded == true) {
             return;
         }
         //if(GameManager.gameIsPaused == false && Input.GetMouseButtonDown(0)) {
@@ -63,8 +63,8 @@ public class PlayerController : MonoBehaviour
             Cursor.visible = false;
         }
 
-        pointerDelta = GameManager.playerActionsControls.Player.Look.ReadValue<Vector2>();
-        keyboardLook = GameManager.playerActionsControls.Player.LookKeyboard.ReadValue<Vector2>();
+        pointerDelta = GameManager.playerActionsControls.Player.Look.ReadValue<Vector2>() * GameManager.mouseSensitivity;
+        keyboardLook = GameManager.playerActionsControls.Player.LookKeyboard.ReadValue<Vector2>() * GameManager.keyboardSensitivity;
 
         crosshairWorld.position += new Vector3(pointerDelta.x, pointerDelta.y, 0f) / 50f;
         crosshairUI.position += new Vector3(pointerDelta.x, pointerDelta.y, 0f);

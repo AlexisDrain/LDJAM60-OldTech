@@ -32,6 +32,8 @@ Have fun!!
 Full credits + Source code:  
 https://github.com/AlexisDrain/LDJAM60-OldTech  
 
+LDJAM60 Page:  
+https://ldjam.com/events/ludum-dare/60/astral-gravity-0  
 
 === Credits ===
 

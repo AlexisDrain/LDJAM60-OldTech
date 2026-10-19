@@ -19,7 +19,7 @@ public class PlayerZeroGrav : MonoBehaviour
     }
     public void RemoveAttachedObject() {
         attachedObject = null;
-        print(attachedObject);
+
         holdLoopAudio.Stop();
         lightningLine.StartPosition = Vector3.zero;
         lightningLine.EndPosition = Vector3.zero;

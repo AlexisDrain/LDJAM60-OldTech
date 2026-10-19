@@ -6,8 +6,12 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class GameManager : MonoBehaviour {
+
+    public static float mouseSensitivity = 1f;
+    public static float keyboardSensitivity = 1f;
 
     public static bool playerIsAlive = true;
     public static bool startedGameOnce = false;
@@ -55,6 +59,8 @@ public class GameManager : MonoBehaviour {
     {
 
         Time.timeScale = 0f;
+        mouseSensitivity = 1f;
+        keyboardSensitivity = 1f;
         playerIsAlive = true;
         startedGameOnce = false;
         gameIsPaused = true;
@@ -159,6 +165,9 @@ public class GameManager : MonoBehaviour {
         tutorial_Respawn.SetActive(false);
         GameManager.StartLevel(currentLevelIdx);
         GameManager.particle_blood.Clear();
+        // error: Invalid worldAABB. Object is too large or too far away from the origin.
+        // GameManager.pool_EnemyBullets.DeactivateAllMembers();
+        // GameManager.pool_PlayerBullets.DeactivateAllMembers();
 
         for (var i = 2; i < 5; i++) {
             if (GameManager.playerInv.playerHasWeapon[i]) {
@@ -183,13 +192,14 @@ public class GameManager : MonoBehaviour {
         }
     }
     public static void BeatFinalBoss() {
-        gameIsEnded = true;
+        GameManager.gameIsEnded = true;
         GameManager.playerInv.StripGravityGun();
         GameManager.playerInv.StripWeaponsExceptGravity();
         bg_firstLaunch.gameObject.SetActive(true);
         button_Resume.SetActive(false);
         button_StartGame.SetActive(true);
 
+        Cursor.lockState = CursorLockMode.None;
         Time.timeScale = 0f;
 
         endingCutscene.InvokeEnding();
