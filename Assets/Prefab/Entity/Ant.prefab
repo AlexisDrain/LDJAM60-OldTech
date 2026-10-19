@@ -307,6 +307,13 @@ MonoBehaviour:
   onHurt:
     m_PersistentCalls:
       m_Calls: []
+  onKill:
+    m_PersistentCalls:
+      m_Calls: []
+  hurtSFX: []
+  deathSFX:
+  - {fileID: 8300000, guid: 1dd1653302facf34a88d33c55b9ed958, type: 3}
+  - {fileID: 8300000, guid: 39379eb3b72d2cc489f6aeb8a8f4bae6, type: 3}
   spawnOnDeath: {fileID: 0}
 --- !u!135 &7869278530004057518
 SphereCollider:

@@ -76,6 +76,14 @@ MonoBehaviour:
   onHurt:
     m_PersistentCalls:
       m_Calls: []
+  onKill:
+    m_PersistentCalls:
+      m_Calls: []
+  hurtSFX:
+  - {fileID: 8300000, guid: 72d229d81dd70ef46b6223e94a4c1f4e, type: 3}
+  deathSFX:
+  - {fileID: 8300000, guid: 1dd1653302facf34a88d33c55b9ed958, type: 3}
+  - {fileID: 8300000, guid: 39379eb3b72d2cc489f6aeb8a8f4bae6, type: 3}
   spawnOnDeath: {fileID: 0}
 --- !u!135 &4437308551858949938
 SphereCollider:
@@ -176,7 +184,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.9
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0

@@ -21,11 +21,14 @@ public class PlayerShoot : MonoBehaviour
     public AudioClip emptySFX;
     public AudioClip shootSFX;
 
+    private AudioSource tommyLoop_audio;
+
     public float defaultNextShotTime;
     private float currentNextShotTime;
     private Light light;
     void Start() {
         light = GetComponent<Light>();
+        tommyLoop_audio = GetComponent<AudioSource>();
     }
     private void FixedUpdate() {
         if (currentNextShotTime > 0f) {
@@ -43,15 +46,25 @@ public class PlayerShoot : MonoBehaviour
 
         if (myWeapon == Weapon.MachineGun) {
 
+            if(GameManager.playerActionsControls.Player.Shoot.IsPressed() == false) {
+                tommyLoop_audio.Stop();
+            }
+
             if (GameManager.playerActionsControls.Player.Shoot.IsPressed() && currentNextShotTime <= 0f) { // can hold down weapon
                 currentNextShotTime = defaultNextShotTime;
 
                 // shoot()
                 if (ammo <= 0) {
                     GameManager.soundManager.SpawnLoudAudio(emptySFX);
+                    if (tommyLoop_audio.isPlaying == true) {
+                        tommyLoop_audio.Stop();
+                    }
                     return;
                 }
-                GameManager.soundManager.SpawnLoudAudio(shootSFX);
+                // GameManager.soundManager.SpawnLoudAudio(shootSFX);
+                if (tommyLoop_audio.isPlaying == false) {
+                    tommyLoop_audio.Play();
+                }
                 GameManager.playerTrans.GetComponent<Rigidbody>().AddForce(-GameManager.playerTrans.forward * 1f, ForceMode.Impulse);
                 // StartCoroutine(ShootCoroutine());
                 GameObject bullet = GameManager.pool_PlayerBullets.Spawn(transform.position);

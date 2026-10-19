@@ -11,9 +11,9 @@ public class PlayerZeroGrav : MonoBehaviour
     public AudioClip shootSFX;
     public AudioClip failSFX;
     public float shootForce = 5f;
-
+    private AudioSource holdLoopAudio;
     void Start() {
-
+        holdLoopAudio = GetComponent<AudioSource>();
     }
     public void RemoveAttachedObject() {
         attachedObject = null;
@@ -68,7 +68,13 @@ public class PlayerZeroGrav : MonoBehaviour
     }
     public void FixedUpdate() {
         if (attachedObject == null) {
+            if(holdLoopAudio.isPlaying == true) {
+                holdLoopAudio.Stop();
+            }
             return;
+        }
+        if (holdLoopAudio.isPlaying == false) {
+            holdLoopAudio.Play();
         }
         // attachedObject.GetComponent<Rigidbody>().AddForce(dir * speed * Time.deltaTime);
         attachedObject.GetComponent<Rigidbody>().MovePosition(Vector3.MoveTowards(attachedObject.transform.position, targetHold.position, 0.2f));

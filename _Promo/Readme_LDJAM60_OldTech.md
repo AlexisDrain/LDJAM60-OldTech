@@ -68,8 +68,18 @@ https://freesound.org/people/Dredile/sounds/111676/ -- License: Creative Commons
 - Enemy bullets:
 Sonnis 2017 - Game Audio Bundle\Fascinated Sound - Scene Shop Tool Box\Impact Nail Gun 01 Single Shot Compressed Air and Action.wav
 
+- Zero gravity gun hold:
+Sonniss 2017 - Game Audio Bundle\Glitchedtones - Drones\Alien Spacecraft Electrical Drone 03.wav
+
+- Zero gravity gun launch:
+Sonniss 2018 - Game Audio Bundle\SoundMorph - FUTURE WEAPONS 3\Future Weapons 3 - Grenade Launcher 2 - Hit 2.wav
+
 - Machinegun:  
 Sonniss 2020 - Game Audio Bundle\Super Thump - Weapons of World War II - Designed\STDSGN_WoWW2_Wep_MG_M1919_Machinegun_Auto-Burst_Shot_X6.wav
+
+- Glass break:  
+Sonniss 2015 - Game Audio Bundle\Soundopolis - Glass Smash Full\Glass_Break_ChampagneBottle_D50_Fienup_003.wav  
+Sonniss 2023 - Game Audio Bundle\BluezoneCorp - Broken Glass\Bluezone_BC0274_glass_impact_break_small_014.wav
 
 - Guns:
 Sonniss 2017 - Game Audio Bundle\Gamemaster Audio -  Gun Sound Pack\gun_revolver_pistol_shot_04.wav

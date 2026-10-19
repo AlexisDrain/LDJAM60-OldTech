@@ -281,7 +281,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.9
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -336,7 +336,6 @@ MonoBehaviour:
   lerpSpeed: 3
   targetIsPlayer: 1
   target: {fileID: 0}
-  myRigidbody: {fileID: 657951895245396643}
   mySprite: {fileID: 380078469190144819}
   flipYIfUnder: 0
 --- !u!114 &8140000401639847346
@@ -369,6 +368,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EntityHealth
   maxHealth: 30
   bleed: 1
+  onHurt:
+    m_PersistentCalls:
+      m_Calls: []
+  onKill:
+    m_PersistentCalls:
+      m_Calls: []
+  hurtSFX:
+  - {fileID: 8300000, guid: 72d229d81dd70ef46b6223e94a4c1f4e, type: 3}
+  deathSFX:
+  - {fileID: 8300000, guid: 1dd1653302facf34a88d33c55b9ed958, type: 3}
+  - {fileID: 8300000, guid: 39379eb3b72d2cc489f6aeb8a8f4bae6, type: 3}
+  spawnOnDeath: {fileID: 0}
 --- !u!1 &7860991660012723018
 GameObject:
   m_ObjectHideFlags: 0
