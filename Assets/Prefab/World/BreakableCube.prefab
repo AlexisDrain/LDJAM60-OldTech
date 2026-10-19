@@ -423,7 +423,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   battery: 0
-  breakOnMagnatude: 3
+  hurtOnNextImpact: 0
+  hurtOnMagnatude: 1
 --- !u!114 &953264028068735096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -438,4 +439,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   maxHealth: 10
   bleed: 0
+  onHurt:
+    m_PersistentCalls:
+      m_Calls: []
+  onKill:
+    m_PersistentCalls:
+      m_Calls: []
+  hurtSFX: []
+  deathSFX:
+  - {fileID: 8300000, guid: 8eddfebe961d86c408d6f01b4cc7e337, type: 3}
   spawnOnDeath: {fileID: 0}

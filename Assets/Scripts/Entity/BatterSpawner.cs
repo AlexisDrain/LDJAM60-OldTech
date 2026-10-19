@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class BatterSpawner : MonoBehaviour {
     /* Alexis Clay Drain */
+    public AudioClip spawnBatterySFX;
     public GameObject batteryPrefab;
     public Transform spawnLocation;
     private GameObject currentBattery;
@@ -24,5 +25,6 @@ public class BatterSpawner : MonoBehaviour {
         }
         currentTimeToRespawn = 4f;
         currentBattery = GameObject.Instantiate(batteryPrefab, spawnLocation.position, spawnLocation.rotation, transform);
+        GameManager.soundManager.SpawnLoudAudio(spawnBatterySFX);
     }
 }

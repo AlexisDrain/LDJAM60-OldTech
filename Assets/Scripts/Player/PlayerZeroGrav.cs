@@ -1,3 +1,4 @@
+using DigitalRuby.LightningBolt;
 using System.Collections;
 using UnityEngine;
 
@@ -5,6 +6,7 @@ public class PlayerZeroGrav : MonoBehaviour
 {
     /* Alexis Clay Drain */
     public LineRenderer crosshairLine;
+    public LightningBoltScript lightningLine;
     public GameObject lookingAtObject;
     public GameObject attachedObject;
     public Transform targetHold;
@@ -17,7 +19,9 @@ public class PlayerZeroGrav : MonoBehaviour
     }
     public void RemoveAttachedObject() {
         attachedObject = null;
-        GameManager.tutorial_GrabObject.SetActive(false);
+        if(GameManager.tutorial_GrabObject) {
+            GameManager.tutorial_GrabObject.SetActive(false);
+        }
     }
     private void OnDisable() {
         RemoveAttachedObject();
@@ -68,14 +72,19 @@ public class PlayerZeroGrav : MonoBehaviour
     }
     public void FixedUpdate() {
         if (attachedObject == null) {
-            if(holdLoopAudio.isPlaying == true) {
+            if (holdLoopAudio.isPlaying == true) {
                 holdLoopAudio.Stop();
+                lightningLine.StartPosition = Vector3.zero;
+                lightningLine.EndPosition = Vector3.zero;
             }
             return;
         }
         if (holdLoopAudio.isPlaying == false) {
             holdLoopAudio.Play();
+            lightningLine.enabled = true;
         }
+        lightningLine.StartPosition = transform.position;
+        lightningLine.EndPosition = attachedObject.transform.position;
         // attachedObject.GetComponent<Rigidbody>().AddForce(dir * speed * Time.deltaTime);
         attachedObject.GetComponent<Rigidbody>().MovePosition(Vector3.MoveTowards(attachedObject.transform.position, targetHold.position, 0.2f));
         attachedObject.GetComponent<Rigidbody>().MoveRotation(targetHold.rotation);

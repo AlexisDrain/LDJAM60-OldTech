@@ -92,6 +92,12 @@ Sonnis 2020 - Game Audio Bundle\Super Thump - Weapons of World War II - Designed
 - Shader to draw 3D outlines:
 https://ameye.dev/notes/edge-detection-outlines/
 
+- Lightning Bolt Effect for Unity (Line Renderer):
+https://assetstore.unity.com/packages/tools/particles-effects/lightning-bolt-effect-for-unity-59471
+
+- Auto Scroll Rect by Martin Jonasson. For navigating option UIs using a controller.
+https://discussions.unity.com/t/scrollview-using-controller-arrowkeys/817360/13 -- MIT license
+
 
 === Fonts ===
 
