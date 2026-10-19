@@ -25,6 +25,10 @@ public class PlayerZeroGrav : MonoBehaviour
     RaycastHit hit;
     public void Update() {
 
+        if(GameManager.gameIsPaused == true) {
+            return;
+        }
+
         Physics.Raycast(GameManager.playerTrans.position, GameManager.playerTrans.forward, out hit, 8f);
         if(hit.collider && (hit.collider.GetComponent<Moveable>() || hit.collider.GetComponent<ItemPickup>())) {
             lookingAtObject = hit.collider.gameObject;

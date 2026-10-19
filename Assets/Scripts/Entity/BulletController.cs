@@ -8,12 +8,13 @@ public class BulletController : MonoBehaviour
     public int damage = 10;
     public bool hurtPlayer = false;
     public bool hurtEnemy = false;
-    // public TrailRenderer myTrail;
+    public TrailRenderer myTrail;
     private Rigidbody myRigidbody;
     void Awake() {
         myRigidbody = GetComponent<Rigidbody>();
     }
-    private void OnEnable() {
+    private void OnDisable() {
+        myTrail.Clear();
         // myTrail.AddPosition(transform.position);
     }
     private void OnTriggerEnter(Collider other) {

@@ -32,6 +32,11 @@ public class PlayerShoot : MonoBehaviour
         }
     }
     private void Update() {
+
+        if (GameManager.gameIsPaused == true) {
+            return;
+        }
+
         if (myWeapon == Weapon.MachineGun) {
 
             if (GameManager.playerActionsControls.Player.Shoot.IsPressed() && currentNextShotTime <= 0f) { // can hold down weapon

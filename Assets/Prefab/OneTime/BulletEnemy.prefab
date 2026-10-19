@@ -312,6 +312,7 @@ MonoBehaviour:
   damage: 20
   hurtPlayer: 1
   hurtEnemy: 0
+  myTrail: {fileID: 1746261804202750288}
 --- !u!114 &8765973375155360276
 MonoBehaviour:
   m_ObjectHideFlags: 0
