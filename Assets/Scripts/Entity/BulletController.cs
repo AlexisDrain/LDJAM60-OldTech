@@ -29,6 +29,11 @@ public class BulletController : MonoBehaviour
         }
         if (other.GetComponent<EntityHealth>()) {
             other.GetComponent<EntityHealth>().DoDamage(damage);
+
+            if (other.GetComponent<EntityHealth>().bleed == true) {
+                GameManager.particle_blood.transform.position = transform.position;
+                GameManager.particle_blood.Play();
+            }
         }
         if (hurtPlayer == true && other.GetComponent <PlayerHealth>()) {
             other.GetComponent<PlayerHealth>().DoDamage(damage);

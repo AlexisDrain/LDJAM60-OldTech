@@ -122,7 +122,7 @@ public class GameManager : MonoBehaviour {
                 return;
             }
 
-            if(GameManager.startedGameOnce == false) {
+            if (GameManager.startedGameOnce == false || GameManager.gameIsEnded == true) {
                 return;
             }
 

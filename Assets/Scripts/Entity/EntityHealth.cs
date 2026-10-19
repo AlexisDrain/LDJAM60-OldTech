@@ -31,10 +31,6 @@ public class EntityHealth : MonoBehaviour
         }
         onHurt.Invoke();
         health -= damage;
-        if(bleed == true) {
-            GameManager.particle_blood.transform.position = transform.position;
-            GameManager.particle_blood.Play();
-        }
         if (health <= 0) {
             onKill.Invoke();
             if (spawnOnDeath) {

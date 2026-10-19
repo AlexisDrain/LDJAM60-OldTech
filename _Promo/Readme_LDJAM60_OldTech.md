@@ -53,6 +53,12 @@ Halfquake 1 by Muddasheep https://store.steampowered.com/app/644320/Halfquake_Tr
 - UI buttons hover. Player injury sound. Explosions. Enemy attack charge. Crunchy sound effects:  
 BFXR https://www.bfxr.net/
 
+- Ant death:
+Life Death Exit by Muddasheep https://store.steampowered.com/app/4978330/Life_Death_Exit/
+
+- Box open:
+Sonniss 2024 - Game Audio Bundle\Mechanical Wave - Cardboard and Paper\OBJPack_Big Cardboard Box Impact_ 02_MWSFX_CDAP.wav
+
 - Weapon pickup:
 loy's gun bullet case in.wav by martian -- https://freesound.org/s/182261/ -- License: Creative Commons 0
 
@@ -61,6 +67,9 @@ https://freesound.org/people/Dredile/sounds/111676/ -- License: Creative Commons
 
 - Enemy bullets:
 Sonnis 2017 - Game Audio Bundle\Fascinated Sound - Scene Shop Tool Box\Impact Nail Gun 01 Single Shot Compressed Air and Action.wav
+
+- Machinegun:  
+Sonniss 2020 - Game Audio Bundle\Super Thump - Weapons of World War II - Designed\STDSGN_WoWW2_Wep_MG_M1919_Machinegun_Auto-Burst_Shot_X6.wav
 
 - Guns:
 Sonniss 2017 - Game Audio Bundle\Gamemaster Audio -  Gun Sound Pack\gun_revolver_pistol_shot_04.wav
