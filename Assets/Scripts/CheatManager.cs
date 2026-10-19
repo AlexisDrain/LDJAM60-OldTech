@@ -9,8 +9,8 @@ public class CheatManager : MonoBehaviour
         GameManager.playerInv.playerHasWeapon[idx] = true;
         GameManager.playerInv.UpdateWeapons();
     }
-    public void SpawnPlayer(PlayerCheckpoint newCheckpoint) {
-        GameManager.TeleportPlayer(newCheckpoint);
+    public void SpawnPlayer(GameObject newLevel) {
+        GameManager.TeleportPlayer(newLevel);
     }
     public void Update() {
 

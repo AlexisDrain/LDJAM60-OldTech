@@ -25,7 +25,7 @@ public class PlayerZeroGrav : MonoBehaviour
     RaycastHit hit;
     public void Update() {
 
-        if(GameManager.gameIsPaused == true) {
+        if(GameManager.gameIsPaused == true || GameManager.playerIsAlive == false) {
             return;
         }
 

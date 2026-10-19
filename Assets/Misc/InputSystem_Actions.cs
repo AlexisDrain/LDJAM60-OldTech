@@ -233,6 +233,16 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""priority"": 0
                 },
                 {
+                    ""name"": ""Respawn"",
+                    ""type"": ""Button"",
+                    ""id"": ""3d102906-dd7b-46d0-be6e-93e67377b40e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false,
+                    ""priority"": 0
+                },
+                {
                     ""name"": ""CheatMenu"",
                     ""type"": ""Button"",
                     ""id"": ""57acdaa9-e1a5-42bc-a630-b538d0f4ee49"",
@@ -604,6 +614,17 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1450f447-9a66-4450-b651-ef00f4a219ea"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Respawn"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -1336,6 +1357,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Player_Weapon4 = m_Player.FindAction("Weapon4", throwIfNotFound: true);
         m_Player_Weapon5 = m_Player.FindAction("Weapon5", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
+        m_Player_Respawn = m_Player.FindAction("Respawn", throwIfNotFound: true);
         m_Player_CheatMenu = m_Player.FindAction("CheatMenu", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
@@ -1444,6 +1466,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Weapon4;
     private readonly InputAction m_Player_Weapon5;
     private readonly InputAction m_Player_Pause;
+    private readonly InputAction m_Player_Respawn;
     private readonly InputAction m_Player_CheatMenu;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
@@ -1512,6 +1535,10 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/Pause".
         /// </summary>
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Respawn".
+        /// </summary>
+        public InputAction @Respawn => m_Wrapper.m_Player_Respawn;
         /// <summary>
         /// Provides access to the underlying input action "Player/CheatMenu".
         /// </summary>
@@ -1584,6 +1611,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @Respawn.started += instance.OnRespawn;
+            @Respawn.performed += instance.OnRespawn;
+            @Respawn.canceled += instance.OnRespawn;
             @CheatMenu.started += instance.OnCheatMenu;
             @CheatMenu.performed += instance.OnCheatMenu;
             @CheatMenu.canceled += instance.OnCheatMenu;
@@ -1640,6 +1670,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @Respawn.started -= instance.OnRespawn;
+            @Respawn.performed -= instance.OnRespawn;
+            @Respawn.canceled -= instance.OnRespawn;
             @CheatMenu.started -= instance.OnCheatMenu;
             @CheatMenu.performed -= instance.OnCheatMenu;
             @CheatMenu.canceled -= instance.OnCheatMenu;
@@ -2041,6 +2074,13 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnPause(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Respawn" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnRespawn(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "CheatMenu" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

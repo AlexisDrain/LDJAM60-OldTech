@@ -6,6 +6,7 @@ public class Moveable : MonoBehaviour
     public bool battery = false;
     public bool hurtOnNextImpact = false;
     public float hurtOnMagnatude = 1f;
+
     public void OnCollisionEnter(Collision collision) {
         if (hurtOnNextImpact == true && GetComponent<Rigidbody>().linearVelocity.magnitude > hurtOnMagnatude) {
             hurtOnNextImpact = false;

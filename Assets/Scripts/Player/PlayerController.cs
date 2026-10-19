@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
         }
         */
 
-        if (GameManager.gameIsPaused == true) {
+        if (GameManager.gameIsPaused == true || GameManager.playerIsAlive == false) {
             return;
         }
         //if(GameManager.gameIsPaused == false && Input.GetMouseButtonDown(0)) {

@@ -78,7 +78,7 @@ public class PlayerHealth : MonoBehaviour
         GameManager.particle_blood.Play();
 
         if (health <= 0) {
-            GameManager.playerIsAlive = false;
+            GameManager.KillPlayer();
             // gameObject.SetActive(false);
             GameManager.soundManager.SpawnLoudAudio(deathClip);
         } else {

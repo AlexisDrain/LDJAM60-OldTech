@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour {
 
     public static bool playerIsAlive = true;
     public static bool startedGameOnce = false;
     public static bool gameIsPaused = true;
+    public static UnityEvent playerRevive;
+    public static LayerMask layerMask_Trigger;
     public static InputSystem_Actions playerActionsControls;
 
     public static GameManager myGameManager;
@@ -21,12 +24,17 @@ public class GameManager : MonoBehaviour {
     public static ParticleSystem particle_blood;
     public static GameObject tutorial_GrabObject;
     public static GameObject tutorial_Move;
+    public static GameObject tutorial_Respawn;
 
     public static Canvas cheatMenuCanvas;
     public static Canvas inGameCanvas;
     public static Canvas mainMenuCanvas;
 
-    public PlayerCheckpoint playerSpawn;
+    public int currentLevelIdx = 0;
+    public List<GameObject> levelList;
+    [Header("Read only")]
+    public GameObject _currentLevel;
+    public PlayerCheckpoint _currentPlayerSpawn;
 
     void Awake()
     {
@@ -35,6 +43,8 @@ public class GameManager : MonoBehaviour {
 
         playerActionsControls = new InputSystem_Actions();
         playerActionsControls.Enable();
+
+        layerMask_Trigger = LayerMask.NameToLayer("Trigger");
 
         myGameManager = GetComponent<GameManager>();
         soundManager = GetComponent<SoundManager>();
@@ -51,6 +61,8 @@ public class GameManager : MonoBehaviour {
         tutorial_GrabObject = GameObject.Find("Tutorial_GrabObject");
         tutorial_Move = GameObject.Find("Tutorial_Move");
         tutorial_Move.SetActive(false);
+        tutorial_Respawn = GameObject.Find("Tutorial_Respawn");
+        tutorial_Respawn.SetActive(false);
 
         cheatMenuCanvas = GameObject.Find("Canvas/MainMenu/CheatMenu").GetComponent<Canvas>();
         cheatMenuCanvas.enabled = false;
@@ -58,13 +70,25 @@ public class GameManager : MonoBehaviour {
         inGameCanvas.enabled = false;
         mainMenuCanvas = GameObject.Find("Canvas/MainMenu").GetComponent<Canvas>();
 
-        TeleportPlayer(playerSpawn);
+        GameObject devLevels = GameObject.Find("DevLevels");
+        if(devLevels) {
+            Destroy(devLevels);
+        }
+
+        StartLevel(0);
         // GameManager.playerTrans.position = playerSpawn.position;
     }
     private void Update() {
         if(GameManager.startedGameOnce == false) {
             return;
         }
+        if (GameManager.playerIsAlive == false) {
+            if (GameManager.playerActionsControls.Player.Respawn.WasPressedThisFrame()) {
+            //|| (GameManager.canRespawnWithShoot <= 0f && GameManager.playerActionsControls.Player.Shoot.WasPressedThisFrame())) {
+                RespawnPlayer();
+            }
+        }
+
         if(GameManager.playerActionsControls.Player.Pause.WasPressedThisFrame()) {
             if(GameManager.gameIsPaused == false) {
                 PauseGame();
@@ -72,6 +96,26 @@ public class GameManager : MonoBehaviour {
                 ResumeGame();
             }
         }
+    }
+    /*
+    private static float canRespawnWithShoot = 0f;
+    private void FixedUpdate() {
+        if(canRespawnWithShoot > 0f) {
+            canRespawnWithShoot -= Time.deltaTime;
+        }
+    }
+    */
+    public static void KillPlayer() {
+        // canRespawnWithShoot = 1f;
+        GameManager.playerIsAlive = false;
+        tutorial_Respawn.SetActive (true);
+    }
+    private void RespawnPlayer() {
+        GameManager.playerIsAlive = true;
+        GameManager.playerTrans.GetComponent<PlayerHealth>().health = 100;
+        tutorial_Respawn.SetActive(false);
+        GameManager.StartLevel(currentLevelIdx);
+        GameManager.particle_blood.Clear();
     }
     public void StartGame() {
         GameManager.gameIsPaused = false;
@@ -98,8 +142,19 @@ public class GameManager : MonoBehaviour {
         inGameCanvas.enabled = false;
         mainMenuCanvas.enabled = true;
     }
-    public static void TeleportPlayer(PlayerCheckpoint newCheckpoint) {
-        if(newCheckpoint.darkLevel == true) {
+    public static void StartLevel(int levelIdx) {
+        GameManager.myGameManager.currentLevelIdx = levelIdx;
+        TeleportPlayer(GameManager.myGameManager.levelList[levelIdx]);
+    }
+    public static void TeleportPlayer(GameObject newLevel) {
+        Destroy(GameManager.myGameManager._currentLevel);
+        GameManager.myGameManager._currentLevel = GameObject.Instantiate(newLevel);
+
+        PlayerCheckpoint newCheckpoint = newLevel.GetComponent<LevelProperties>().myCheckpoint;
+
+        GameManager.myGameManager._currentPlayerSpawn = newCheckpoint;
+
+        if (newCheckpoint.darkLevel == true) {
             mainCamLight.gameObject.SetActive(false);
             mainCamDark.gameObject.SetActive(true);
         } else {
@@ -112,8 +167,6 @@ public class GameManager : MonoBehaviour {
         } else {
             tutorial_Move.SetActive(false); // not needed. just in case.
         }
-
-        
 
         GameManager.playerTrans.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
         GameManager.playerTrans.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;

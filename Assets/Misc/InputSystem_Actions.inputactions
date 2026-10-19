@@ -147,6 +147,16 @@
                     "priority": 0
                 },
                 {
+                    "name": "Respawn",
+                    "type": "Button",
+                    "id": "3d102906-dd7b-46d0-be6e-93e67377b40e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                },
+                {
                     "name": "CheatMenu",
                     "type": "Button",
                     "id": "57acdaa9-e1a5-42bc-a630-b538d0f4ee49",
@@ -518,6 +528,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1450f447-9a66-4450-b651-ef00f4a219ea",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Respawn",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
