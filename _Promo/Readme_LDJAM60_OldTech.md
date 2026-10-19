@@ -4,11 +4,13 @@ Blast hordes of monsters and navigate a 2.5D spaceship!
 [Long Description]  
 Blast hordes of monsters and navigate a 2.5D spaceship!
 
+Made in 3 days for Ludum Dare 60 Jam. Theme: Old Tech
+
 Full credits + Source code:  
 https://github.com/AlexisDrain/LDJAM60-OldTech  
 
-LDJAM page:
-LINK  
+Ludum Dare 60 Jam Page
+https://ldjam.com/events/ludum-dare/60/astral-gravity-0  
 
 ------
 
