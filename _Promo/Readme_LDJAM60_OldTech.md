@@ -15,8 +15,8 @@ https://ldjam.com/events/ludum-dare/60/astral-gravity-0
 ------
 
 Controls:  
-You can play with keyboard only. Keyboard+mouse. Or controller only.
-You can change the look sensitivity from the options by pausing (Escape or P button).
+- You can play with keyboard only. Keyboard+mouse. Or controller only.  
+- You can change the look sensitivity from the options by pausing (Escape or P button).  
 
 Keyboard+Mouse:
 - Move: WASD
