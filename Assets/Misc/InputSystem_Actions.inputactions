@@ -97,16 +97,6 @@
                     "priority": 0
                 },
                 {
-                    "name": "Weapon5",
-                    "type": "Button",
-                    "id": "216eb2f4-c346-4539-8a30-2d90b740c655",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false,
-                    "priority": 0
-                },
-                {
                     "name": "Pause",
                     "type": "Button",
                     "id": "2ff1c0b1-f6df-4986-a934-d6650bce4dde",
@@ -480,28 +470,6 @@
                 },
                 {
                     "name": "",
-                    "id": "3886af77-5714-4919-83bb-5659747f9358",
-                    "path": "<Keyboard>/5",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Weapon5",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "45a4082f-a672-49f5-bc31-c93156bcc545",
-                    "path": "<Keyboard>/numpad5",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Weapon5",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "d960fb14-f3a8-4ad8-a634-df1dcb258e37",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
@@ -518,6 +486,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4aea8e89-0d79-4790-a469-a62453340286",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad;Joystick",
                     "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false

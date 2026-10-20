@@ -30,6 +30,9 @@ public class UI_Volume : MonoBehaviour
         UpdateValues();
     }
     */
+    private void Start() {
+        UpdateValues();
+    }
     public void VolumeIncreaseByPoint10() {
         /* OldRange = (OldMax - OldMin)
 			NewRange = (NewMax - NewMin)

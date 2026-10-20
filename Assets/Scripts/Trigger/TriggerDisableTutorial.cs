@@ -6,5 +6,6 @@ public class TriggerDisableTutorial : MonoBehaviour
     
     public void DisableMoveTutorial() {
         GameManager.tutorial_Move.SetActive(false);
+        GameManager.tutorial_Controller.SetActive(false);
     }
 }

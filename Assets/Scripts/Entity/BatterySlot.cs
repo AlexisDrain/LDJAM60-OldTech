@@ -16,6 +16,7 @@ public class BatterySlot : MonoBehaviour
             fakeBattery.SetActive(true);
             GameManager.soundManager.SpawnLoudAudio(batteryClip);
             onBatteryInsert.Invoke();
+            GameManager.playerInv.guns[1].GetComponent<PlayerZeroGrav>().RemoveAttachedObject();
         }
     }
 }

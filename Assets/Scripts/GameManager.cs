@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour {
     public static ParticleSystem particle_blood;
     public static GameObject tutorial_GrabObject;
     public static GameObject tutorial_Move;
+    public static GameObject tutorial_Controller;
     public static GameObject tutorial_Respawn;
 
     public static Image bg_firstLaunch;
@@ -86,6 +87,8 @@ public class GameManager : MonoBehaviour {
         tutorial_GrabObject = GameObject.Find("Tutorial_GrabObject");
         tutorial_Move = GameObject.Find("Tutorial_Move");
         tutorial_Move.SetActive(false);
+        tutorial_Controller = GameObject.Find("Tutorial_Controller");
+        tutorial_Controller.SetActive(false);
         tutorial_Respawn = GameObject.Find("Tutorial_Respawn");
         tutorial_Respawn.SetActive(false);
 
@@ -281,8 +284,10 @@ public class GameManager : MonoBehaviour {
 
         if(newCheckpoint.showMoveTutorial) {
             tutorial_Move.SetActive(true);
+            tutorial_Controller.SetActive(true);
         } else {
             tutorial_Move.SetActive(false); // not needed. just in case.
+            tutorial_Controller.SetActive(false);
         }
 
         GameManager.playerTrans.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
