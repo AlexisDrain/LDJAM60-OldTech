@@ -17,7 +17,7 @@ https://ldjam.com/events/ludum-dare/60/astral-gravity-0
 Controls:  
 You can play with keyboard only. Keyboard+mouse. Or controller only.
 
-Keyboard+mouse:
+Keyboard+Mouse:
 - Move: WASD
 - Aim: Up/Down arrow keys OR mouse.
 - Shoot: Left mouse click, or Space.
