@@ -21,6 +21,7 @@ public class PlayerInv : MonoBehaviour
     public Image crosshairImagePhantom;
     public Image infinitySign;
     public AudioClip switchWeaponSFX;
+    public AudioClip cannotSelect;
 
     public List<bool> playerHasWeapon = new List<bool>();
     public List<Image> gunBGs = new List<Image>();
@@ -201,16 +202,32 @@ public class PlayerInv : MonoBehaviour
         }
 
         if (GameManager.playerActionsControls.Player.Weapon1.WasPressedThisFrame()) {
-            SwitchToWeapon(1);
+            if (playerHasWeapon[1] == false) {
+                GameManager.soundManager.SpawnLoudAudio(cannotSelect);
+            } else {
+                SwitchToWeapon(1);
+            }
         }
         if (GameManager.playerActionsControls.Player.Weapon2.WasPressedThisFrame()) {
-            SwitchToWeapon(2);
+            if (playerHasWeapon[2] == false) {
+                GameManager.soundManager.SpawnLoudAudio(cannotSelect);
+            } else {
+                SwitchToWeapon(2);
+            }
         }
         if (GameManager.playerActionsControls.Player.Weapon3.WasPressedThisFrame()) {
-            SwitchToWeapon(3);
+            if (playerHasWeapon[3] == false) {
+                GameManager.soundManager.SpawnLoudAudio(cannotSelect);
+            } else {
+                SwitchToWeapon(3);
+            }
         }
         if (GameManager.playerActionsControls.Player.Weapon4.WasPressedThisFrame()) {
-            SwitchToWeapon(4);
+            if (playerHasWeapon[4] == false) {
+                GameManager.soundManager.SpawnLoudAudio(cannotSelect);
+            } else {
+                SwitchToWeapon(4);
+            }
         }
     }
 }

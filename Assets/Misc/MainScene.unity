@@ -50207,6 +50207,7 @@ MonoBehaviour:
   crosshairImagePhantom: {fileID: 205406303}
   infinitySign: {fileID: 1679128560}
   switchWeaponSFX: {fileID: 8300000, guid: a8f57613ca8f99049a31ba6127088f76, type: 3}
+  cannotSelect: {fileID: 8300000, guid: 24dc06da1dfbed0438b3f9d5f52b1bf6, type: 3}
   playerHasWeapon: 0000000000y
   gunBGs:
   - {fileID: 0}
